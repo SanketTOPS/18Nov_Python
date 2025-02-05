@@ -12,7 +12,7 @@ lbl2 = tkinter.Label(text="Lastname:").pack()"""
 """lbl1 = tkinter.Label(text="Firstname:").place(x=0, y=0)
 lbl2 = tkinter.Label(text="Lastname:").place(x=0, y=30)"""
 
-lbl1 = tkinter.Label(
+lbl1 = tkinter.Label(  
     text="Firstname:", bg="black", fg="orange", font="Ebrima 15 bold"
 ).grid(row=0, column=0, sticky="w")
 lbl2 = tkinter.Label(
