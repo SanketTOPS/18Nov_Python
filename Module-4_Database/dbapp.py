@@ -1,5 +1,6 @@
 import sqlite3
 
+# Database connection
 try:
     db = sqlite3.connect("mydb.db")
     print("Database created/connected!")
