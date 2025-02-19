@@ -1,0 +1,29 @@
+body {
+    background-color: bisque;
+}
+
+.navbar {
+    background-color: blueviolet;
+    height: 60px;
+
+}
+
+li {
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+}
+
+.sidebar {
+    background-color: rgb(140, 127, 153);
+    height: 600px;
+    width: 350px;
+}
+
+.footer {
+    background-color: rgb(3, 3, 3);
+    height: 150px;
+    color: white;
+    text-align: center;
+}
