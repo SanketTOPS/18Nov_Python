@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showdata</title>
+</head>
+
+<body style="background-color: rgb(218, 228, 139);">
+    <h1 style="text-align: center;">Welcome to Database Project</h1>
+    <hr>
+    <div>
+        <h1 style="text-align: center;">Students Data</h1>
+        <hr>
+        <!-- {{stdata}} -->
+        <!-- {% for i in stdata %}
+        {{i.id}}
+        {{i.name}}
+        {{i.email}}
+        {{i.dob}}
+        {{i.mobile}}
+        {{i.address}}
+        {% endfor %} -->
+
+        <table border="2" align="center">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>DOB</th>
+                <th>Mobile</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+            {% for i in stdata %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.name}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.dob}}</td>
+                <td>{{i.mobile}}</td>
+                <td>{{i.address}}</td>
+                <td><a href="/deletedata/{{i.id}}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+</body>
+
+</html>
