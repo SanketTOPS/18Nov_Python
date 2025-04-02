@@ -50,6 +50,13 @@
     </nav>
     <!-- Navbar End -->
     <div class="container my-5">
+
+        {% if msg %}
+        <div class="alert alert-danger alert-dismissible fade show my-2" role="alert">
+            <strong>{{msg}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
         <h2 style="text-align: center;">Signup</h2>
         <hr>
         <form method="post" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>

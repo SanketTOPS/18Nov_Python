@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import *
 
 # Create your views here.
@@ -9,18 +9,38 @@ def index(request):
 
 
 def signin(request):
-    return render(request, "signin.html")
+    msg = ""
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = userSignup.objects.filter(username=username, password=password)
+        if user:  # TRUE
+            print("Login Successfull!")
+            return redirect("notes")
+        else:
+            print("Error!Login Faild...")
+            msg = "Error!Login Faild..."
+    return render(request, "signin.html", {"msg": msg})
 
 
 def signup(request):
+    msg = ""
     if request.method == "POST":
         newuser = signupForm(request.POST, request.FILES)
+        username = ""
         if newuser.is_valid():
-            newuser.save()
-            print("Signup Successfully!")
+            try:
+                username = newuser.cleaned_data.get(username=username)
+                print("Username is already exists!")
+                msg = "Username is already exists!"
+            except userSignup.DoesNotExist:
+                newuser.save()
+                print("Signup Successfully!")
+                return redirect("signin")
         else:
             print(newuser.errors)
-    return render(request, "signup.html")
+    return render(request, "signup.html", {"msg": msg})
 
 
 def notes(request):
