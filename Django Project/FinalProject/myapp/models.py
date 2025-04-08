@@ -13,3 +13,4 @@ class userSignup(models.Model):
     city = models.CharField(max_length=20)
     mobile = models.BigIntegerField()
     photo = models.ImageField(upload_to="Photos")
+    is_verified = models.BooleanField(default=False)

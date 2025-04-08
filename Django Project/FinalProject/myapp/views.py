@@ -4,6 +4,7 @@ from django.contrib.auth import logout
 from django.core.mail import send_mail, send_mass_mail
 from FinalProject import settings
 import random
+import json
 
 # Create your views here.
 
@@ -19,9 +20,12 @@ def signin(request):
         password = request.POST.get("password")
 
         user = userSignup.objects.filter(username=username, password=password)
+        userid = userSignup.objects.get(username=username)
+        print("Current User:", userid.id)
         if user:  # TRUE
             print("Login Successfull!")
             request.session["user"] = username  # generate a session
+            request.session["userid"] = userid.id
             return redirect("notes")
         else:
             print("Error!Login Faild...")
@@ -31,6 +35,7 @@ def signin(request):
 
 def signup(request):
     msg = ""
+    global newuser
     if request.method == "POST":
         newuser = signupForm(request.POST, request.FILES)
         username = ""
@@ -38,23 +43,25 @@ def signup(request):
             try:
                 username = newuser.cleaned_data.get("username")
                 userSignup.objects.get(username=username)
-                print("Username is already exists!")
-                msg = "Username is already exists!"
+                msg = "Error!Username is already exists..."
             except userSignup.DoesNotExist:
+                # OTP Email Sending
                 newuser.save()
-                print("Signup Successfully!")
-
-                # Email Sending Code
-
-                otp = random.randint(11111, 99999)
-                sub = "Verify your account"
-                msg = f"Hello User!\n\nThank you for registraion with us!\nYour account has been created!\n\nYour one time password is {otp}.\n\nThanks & Regards\nTOPS Technologies\n+919724799469 | sanket.tops@gmail.com"
-                from_ID = settings.EMAIL_HOST_USER
-                to_ID = [request.POST.get("username")]
+                global otp
+                otp = random.randint(1111, 9999)
+                sub = "Verify your account!"
+                mmsg = f"Hello User\n\nThank you for registraion with us!\nYour account verification code is {otp}.\n\nThanks & Regards\nSanket Chauhan | TOPS Tech-Rajkot\n+91 9724799469 | sanket.tops@gmail.com"
+                from_email = settings.EMAIL_HOST_USER
+                to_email = [request.POST.get("username")]
                 send_mail(
-                    subject=sub, message=msg, from_email=from_ID, recipient_list=to_ID
+                    subject=sub,
+                    message=mmsg,
+                    from_email=from_email,
+                    recipient_list=to_email,
                 )
-                return redirect("otpverify")
+                msg = "Email OTP sent, Please verify your account"
+                # return redirect("otpverify")
+                return redirect("signin")
         else:
             print(newuser.errors)
     return render(request, "signup.html", {"msg": msg})
@@ -66,7 +73,24 @@ def notes(request):
 
 
 def profile(request):
-    return render(request, "profile.html")
+    msg = ""
+    user = request.session.get("user")
+    userid = request.session.get("userid")
+    cuser = userSignup.objects.get(id=userid)
+    if request.method == "POST":
+        updatereq = signupForm(request.POST, request.FILES, instance=cuser)
+        if updatereq.is_valid():
+            updatereq.save()
+            print("Your profile has been updated!")
+            msg = "Your profile has been updated!"
+            return redirect("profile")
+        else:
+            print(updatereq.errors)
+    return render(
+        request,
+        "profile.html",
+        {"user": user, "cuser": cuser, "msg": msg},
+    )
 
 
 def about(request):
@@ -83,4 +107,16 @@ def userlogut(request):
 
 
 def otpverify(request):
-    return render(request, "otpverify.html")
+    global otp
+    msg = ""
+
+    print("OTP:", otp)
+
+    if request.method == "POST":
+        if request.POST["otp"] == str(otp):
+            msg = "Verification Successfull!"
+            return redirect("signin")
+        else:
+            msg = "Invalid OTP. Please try again."
+
+    return render(request, "otpverify.html", {"msg": msg})
