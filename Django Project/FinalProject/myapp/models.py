@@ -14,3 +14,18 @@ class userSignup(models.Model):
     mobile = models.BigIntegerField()
     photo = models.ImageField(upload_to="Photos")
     is_verified = models.BooleanField(default=False)
+
+
+class noteSubmit(models.Model):
+    title = models.CharField(max_length=100)
+    desc = models.TextField()
+    notefile = models.FileField(upload_to="media/Notes")
+    user = models.ForeignKey(userSignup, on_delete=models.CASCADE)
+    submitted_at = models.DateTimeField(auto_now_add=True)
+    approved_at = models.DateTimeField(null=True, blank=True)
+    status_choice = [
+        ("Pending", "Pending"),
+        ("Approved", "Approved"),
+        ("Rejected", "Rejected"),
+    ]
+    status = models.CharField(max_length=20, choices=status_choice)

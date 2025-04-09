@@ -1,0 +1,19 @@
+MWF - Shift Time:08:00 to 04:30
+====================================
+08:00 to 09:30 - 18Nov_Python_Sanket
+09:30 to 11:00 - New Python
+11:00 to 12:00 - 20Feb_Digital Marketing_Sanket
+12:30 to 01:30 - 05Feb_Digital Marketing_Sanket
+02:00 to 03:00 - Web Designing Batch
+03:30 to 04:30 - 04Feb_Python_Sanket 
+
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+
+TTS - Shift Time:11:00 to 07:30
+==================================================
+11:00 to 12:00 - 20Feb_Digital Marketing_Sanket
+12:30 to 01:30 - 05Feb_Digital Marketing_Sanket
+02:00 to 03:00 - Web Designing Batch
+03:30 to 04:30 - 04Feb_Python_Sanket 
+04:30 to 06:00 - 27Dec_Python_Sanket
+06:00 to 07:30 - 27Jan_Python_Sanket

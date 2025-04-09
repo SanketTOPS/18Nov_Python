@@ -5,6 +5,7 @@ from django.core.mail import send_mail, send_mass_mail
 from FinalProject import settings
 import random
 import json
+from datetime import datetime
 
 # Create your views here.
 
@@ -68,8 +69,23 @@ def signup(request):
 
 
 def notes(request):
+    msg = ""
     user = request.session.get("user")
-    return render(request, "notes.html", {"user": user})
+    username = userSignup.objects.get(username=user)
+    if request.method == "POST":
+        form = notedForm(request.POST, request.FILES)
+        if form.is_valid():
+            cuser = form.save(commit=False)
+            cuser.submitted_at = datetime.now()
+            cuser.status = "Pending"
+            cuser.user = username
+            cuser.save()
+            print("Your notes has been submitted!")
+            msg = "Your notes has been submitted!"
+            # return redirect("notes")
+        else:
+            print(form.errors)
+    return render(request, "notes.html", {"user": user, "msg": msg})
 
 
 def profile(request):
@@ -78,7 +94,7 @@ def profile(request):
     userid = request.session.get("userid")
     cuser = userSignup.objects.get(id=userid)
     if request.method == "POST":
-        updatereq = signupForm(request.POST, request.FILES, instance=cuser)
+        updatereq = updateForm(request.POST, request.FILES, instance=cuser)
         if updatereq.is_valid():
             updatereq.save()
             print("Your profile has been updated!")
