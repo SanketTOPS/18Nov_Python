@@ -2,6 +2,14 @@ from django import forms
 from .models import *
 
 
+STATE_CHOICES = (
+    ("Gujarat", "Gujarat"),
+    ("Delhi", "Delhi"),
+    ("Punjab", "Punjab"),
+    ("Other", "Other"),
+)
+
+
 class signupForm(forms.ModelForm):
     class Meta:
         model = userSignup
@@ -9,6 +17,8 @@ class signupForm(forms.ModelForm):
 
 
 class updateForm(forms.ModelForm):
+    state = forms.ChoiceField(choices=STATE_CHOICES, required=False)
+
     class Meta:
         model = userSignup
         fields = [

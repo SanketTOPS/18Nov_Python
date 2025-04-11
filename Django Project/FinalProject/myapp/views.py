@@ -82,7 +82,7 @@ def notes(request):
             cuser.save()
             print("Your notes has been submitted!")
             msg = "Your notes has been submitted!"
-            # return redirect("notes")
+            return redirect("notes")
         else:
             print(form.errors)
     return render(request, "notes.html", {"user": user, "msg": msg})
@@ -96,6 +96,7 @@ def profile(request):
     if request.method == "POST":
         updatereq = updateForm(request.POST, request.FILES, instance=cuser)
         if updatereq.is_valid():
+            updatereq.state = request.POST.get("state") or updatereq.state
             updatereq.save()
             print("Your profile has been updated!")
             msg = "Your profile has been updated!"
