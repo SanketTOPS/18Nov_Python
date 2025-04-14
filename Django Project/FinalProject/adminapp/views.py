@@ -1,5 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from myapp.models import *
+from django.core.mail import send_mail
+from datetime import datetime
+from FinalProject import settings
 
 
 # Create your views here.
@@ -33,3 +36,30 @@ def admin_userdata(request):
 def admin_notesdata(request):
     allnotes = noteSubmit.objects.all()
     return render(request, "admin_notesdata.html", {"allnotes": allnotes})
+
+
+def approved_note(request, id):
+    note = get_object_or_404(noteSubmit, id=id)
+    note.status = "Approved"
+    note.approved_at = datetime.now()
+    note.save()
+    print("Notes approved!")
+
+    # Send Email
+    sub = "Your Notes has been Approved!"
+    msg = f"Hello {note.user.firstname}\n\nYour notes has been approved by Admin.\n\nThanks & Regards\nAdmin - NotesApp\nTOPS Technologies\n+91 9724799469 | sanket.tops@gmail.com"
+    from_email = settings.EMAIL_HOST_USER
+    to_email = [note.user.username]
+    send_mail(subject=sub, message=msg, from_email=from_email, recipient_list=to_email)
+    print("Email sent successfully!")
+
+    return redirect("admin_notesdata")
+
+
+def rejected_note(request, id):
+    note = get_object_or_404(noteSubmit, id=id)
+    note.status = "Rejected"
+    note.approved_at = datetime.now()
+    note.save()
+    print("Notes Rejected!")
+    return redirect("admin_notesdata")

@@ -4,44 +4,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Notesdata</title>
+    <title>Admin | Notes Data</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-color: #f1f8e9;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .table-container {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .table thead {
+            background-color: #2e7d32;
+            color: white;
+        }
+
+        .btn {
+            padding: 4px 12px;
+            font-size: 0.875rem;
+        }
+    </style>
 </head>
 
-<body style="background-color: rgb(208, 239, 150);">
-    <h1 style="text-align: center;">All Notes Data</h1>
-    <hr>
+<body>
 
-    <div class="container my-5">
-        <table class="table table-dark table-hover">
-            <tr>
-                <td>Submitted_at</td>
-                <td>User</td>
-                <td>Title</td>
-                <td>Descriptions</td>
-                <td>Notes</td>
-                <td>Action</td>
+    <h1>All Submitted Notes</h1>
+    <hr class="mx-auto w-50">
 
+    <div class="container my-5 table-container">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Submitted At</th>
+                    <th>User</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>File</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
                 {% for i in allnotes %}
-            <tr>
-                <td>{{i.submitted_at}}</td>
-                <td>{{i.user}}</td>
-                <td>{{i.title}}</td>
-                <td>{{i.desc}}</td>
-                <td><a href="{{i.notefile}}" download>{{i.notefile}}</a></td>
-                <td><a href="#" class="btn btn-success my-2">Approve</a>
-                    <a href="#" class="btn btn-danger">Reject</a>
-                </td>
-            </tr>
-            {% endfor %}
+                <tr>
+                    <td>{{ i.id }}</td>
+                    <td>{{ i.submitted_at }}</td>
+                    <td>{{ i.user.username }}</td>
+                    <td>{{ i.title }}</td>
+                    <td>{{ i.desc }}</td>
+                    <td><a href="{{ i.notefile.url }}" class="btn btn-primary btn-sm" download>Download</a></td>
+                    <td>
+                        {% if i.status == "Pending" %}
+                        <a href="/adminapp/approved_note/{{i.id}}" class="btn btn-success btn-sm">Approve</a>
+                        <a href="/adminapp/rejected_note/{{i.id}}" class="btn btn-danger btn-sm">Reject</a>
+                        {% else %}
+                        <span class="badge bg-secondary">{{ i.status }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
-
     </div>
-
 
 </body>
 
