@@ -115,7 +115,29 @@ def about(request):
 
 
 def contact(request):
-    return render(request, "contact.html")
+    msg = ""
+    if request.method == "POST":
+        form = contactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print("Form submitted!")
+            msg = "Your request has been submitted!"
+
+            # Email Sending Code
+            sub = "Thank you!"
+            email_msg = f"Hello User!\n\nYour request has been submitted!\nOur team will contact you.\nIf have any queries, write here!\n\nThanks & Regards\n+91 9724799469 | www.tops-int.com"
+            from_ID = settings.EMAIL_HOST_USER
+            to_ID = [request.POST["email"]]
+            send_mail(
+                subject=sub,
+                message=email_msg,
+                from_email=from_ID,
+                recipient_list=to_ID,
+            )
+        else:
+            print(form.errors)
+            msg = "Error!Something went wrong..."
+    return render(request, "contact.html", {"msg": msg})
 
 
 def userlogut(request):

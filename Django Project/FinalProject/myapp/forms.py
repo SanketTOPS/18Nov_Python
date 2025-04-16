@@ -37,3 +37,9 @@ class notedForm(forms.ModelForm):
     class Meta:
         model = noteSubmit
         fields = ["title", "desc", "notefile"]
+
+
+class contactForm(forms.ModelForm):
+    class Meta:
+        model = contactUs
+        fields = "__all__"

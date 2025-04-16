@@ -29,3 +29,10 @@ class noteSubmit(models.Model):
         ("Rejected", "Rejected"),
     ]
     status = models.CharField(max_length=20, choices=status_choice)
+
+
+class contactUs(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.BigIntegerField()
+    msg = models.TextField()

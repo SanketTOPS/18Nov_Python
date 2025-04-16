@@ -1,59 +1,259 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
-    <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Contact</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- font awesome style -->
+  <link href="/static/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="/static/css/responsive.css" rel="stylesheet" />
+
 </head>
 
-<body style="background-color: rgb(237, 235, 160);">
+<body class="sub_page">
+
+  <div class="hero_area">
+    <!-- header section strats -->
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <img src="/static/images/notesapp_logo.png" width="40" height="30">NotesApp</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/notes">Notes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/profile">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/contact">Contact</a>
-                    </li>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <img src="/static/images/notesapp_logo.png" width="40" height="30">NotesApp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/notes">Notes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/contact">Contact</a>
+            </li>
 
-                </ul>
-                <a href="/signin" class="btn btn-warning mx-2" type="button">Signin</a>
-                <a href="/signup" class="btn btn-secondary" type="button">Signup</a>
-            </div>
+          </ul>
+          <a href="/signin" class="btn btn-warning mx-2" type="button">Signin</a>
+          <a href="/signup" class="btn btn-secondary" type="button">Signup</a>
         </div>
+      </div>
     </nav>
     <!-- Navbar End -->
+    <!-- end header section -->
+  </div>
 
+  {% if msg %}
+  <div class="alert alert-success alert-dismissible fade show my-2" role="alert">
+    <strong>{{msg}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endif %}
+  <!-- contact section -->
+  <section class="contact_section layout_padding">
     <div class="container">
-        <h2 style="text-align: center;">Contact</h2>
-        <hr>
+      <div class="heading_container heading_center">
+        <h2>
+          Get In Touch
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-lg-6 mx-auto">
+          <div class="form_container">
+            <form method="post">
+              {% csrf_token %}
+              <div>
+                <input type="text" name="name" placeholder="Your Name" />
+              </div>
+              <div>
+                <input type="email" name="email" placeholder="Your Email" />
+              </div>
+              <div>
+                <input type="text" name="phone" placeholder="Your Phone" />
+              </div>
+              <div>
+                <input type="text" name="msg" class="message-box" placeholder="Message" />
+              </div>
+              <div class="btn_box ">
+                <button type="submit">
+                  SEND
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-8 col-lg-6 mx-auto">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.6799314943105!2d70.7723802740499!3d22.290111043267054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959ca248c77c099%3A0xdf5ac10af64ac8ee!2sTOPS%20Technologies!5e0!3m2!1sen!2sin!4v1744773135938!5m2!1sen!2sin"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
     </div>
+  </section>
+  <!-- end contact section -->
+
+  <!-- info section -->
+
+  <section class="info_section layout_padding2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="info_contact">
+            <h4>
+              Address
+            </h4>
+            <div class="contact_link_box">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  Location
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  Call +91 9724799469
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span>
+                  sanket.tops@gmail.com
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="info_social">
+            <a href="">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-linkedin" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_link_box">
+            <h4>
+              Links
+            </h4>
+            <div class="info_links">
+              <a class="" href="/">
+                <img src="/static/images/nav-bullet.png" alt="">
+                Home
+              </a>
+              <a class="active" href="/about">
+                <img src="/static/images/nav-bullet.png" alt="">
+                About
+              </a>
+              <a class="" href="/contact">
+                <img src="/static/images/nav-bullet.png" alt="">
+                Contact
+              </a>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_detail">
+            <h4>
+              Info
+            </h4>
+            <p>
+              Best IT Training Institute in Rajkot Near Me TOPS Technologies in Rajkot has trained over 50,000 students
+              since 2008 and is The Best IT Training Institute near you, offering Graphic Design Course, Web Design
+              Courses, Web Development Courses, Python Development Course, Software Testing Course and IT Courses
+              through Live Project Training.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-3 mb-0">
+          <h4>
+            Subscribe
+          </h4>
+          <form action="#">
+            <input type="text" placeholder="Enter email" />
+            <button type="submit">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end info section -->
+
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By
+        <a href="https://www.tops-int.com/">TOPS Technologies</a>
+      </p>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script src="/static/js/jquery-3.4.1.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="/static/js/bootstrap.js"></script>
+  <!-- custom js -->
+  <script src="/static/js/custom.js"></script>
+
+  <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+  <script>
+    var wa_btnSetting = { "btnColor": "#16BE45", "ctaText": "Chat with us!", "cornerRadius": 40, "marginBottom": 20, "marginLeft": 20, "marginRight": 20, "btnPosition": "right", "whatsAppNumber": "919724799469", "welcomeMessage": "Hello Students!\nMay I help you?", "zIndex": 999999, "btnColorScheme": "light" };
+    window.onload = () => {
+      _waEmbed(wa_btnSetting);
+    };
+  </script>
+
+
 </body>
 
 </html>
