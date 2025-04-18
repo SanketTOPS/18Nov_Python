@@ -82,6 +82,12 @@
             </div>
             <button type="submit" class="btn btn-dark">Signin</button>
         </form>
+        <hr>
+
+        <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}" class="btn btn-danger">Login with
+            Gmail</a>
+        <a href="" class="btn btn-primary">Login with Github</a>
+
     </div>
 
     <!-- Signin Form Start -->
